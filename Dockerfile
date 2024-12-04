@@ -4,4 +4,4 @@ WORKDIR /garbage-collector
 
 COPY ./ ./
 
-ENTRYPOINT ["node index.js"]
+ENTRYPOINT ["node", "index.js"]
