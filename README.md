@@ -3,10 +3,10 @@ This is a Node.js-based garbage collector for Docker private registry containers
 
 The data directory related to the Docker registry should not be included in the path.
 
-# Build the container
+## Build the container
 docker build -t docker-registry-garbage-collector-multi-arch .
 
-# Run the container
+## Run the container
 docker run -d \
   --name docker-registry-garbage-collector \
   --restart always \
