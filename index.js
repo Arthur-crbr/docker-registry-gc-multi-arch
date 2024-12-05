@@ -235,9 +235,14 @@ async function buildManifestsArchitecture(manifest, architecture) {
                 let promisesTable = [];
 
                 for (let manifest of data.manifests) {
-                    promisesTable.push(new Promise((resolve, reject) => {
-                        buildManifestsArchitecture(manifest.digest.replace("sha256:", ""), architecture).then(resolve).catch(reject);
-                    }));
+                    if (manifest.mediaType.includes("image.manifest")) {
+                        promisesTable.push(new Promise((resolve, reject) => {
+                            buildManifestsArchitecture(manifest.digest.replace("sha256:", ""), architecture).then(resolve).catch(reject);
+                        }));
+                    } else {
+                        architecture.layers.add(manifest.digest.replace("sha256:", ""));
+                        architecture.digests.add(manifest.digest.replace("sha256:", ""));
+                    }
                 }
 
                 let error = false;
